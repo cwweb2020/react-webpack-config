@@ -24,7 +24,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
         type: "asset/resource",
         generator: {
           filename: "assets/images/[hash][ext][query]", // Guarda imágenes con hash en el nombre
@@ -56,6 +56,9 @@ module.exports = {
         deleteOriginalAssets: false,
       }),
     ],
+    splitChunks: {
+      chunks: "all", // Optimiza todos los chunks (incluso los cargados de forma lazy)
+    },
   },
   resolve: {
     extensions: [".js", ".jsx"],

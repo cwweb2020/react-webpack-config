@@ -1,5 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  // font-family: Arial, sans-serif;
   background-color: #282c34;
   color: white;
   // display: flex;
@@ -10,6 +19,7 @@ body {
 
 h1 {
   font-size: 3em;
+  margin-bottom: 50px;
 }
 
 h1,
@@ -17,6 +27,10 @@ h2 {
   text-align: center;
 }
 
+.header {
+  background: lightgreen;
+  margin-bottom: 130px;
+}
 .wrapper {
   padding: 0 50px;
   height: 9vh;
@@ -31,12 +45,21 @@ h2 {
     justify-content: space-evenly;
     align-items: center;
     margin-left: auto;
+
+    li {
+      color: black;
+      text-transform: capitalize;
+      font-weight: 600;
+      font-size: 1.2em;
+    }
   }
 }
 
 img {
   width: 100%;
   height: 100%;
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
 }
 
 .photo__gallery {
@@ -54,4 +77,42 @@ img {
   line-height: 36px;
   font-size: 20px;
   text-align: center;
+}
+
+.modal__container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000000c4;
+
+  .modal {
+    width: 70%;
+
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.top-header {
+  padding: 12px 0;
+
+  h2 {
+    font-size: 15px;
+    font-weight: 400;
+  }
+}
+
+a {
+  text-decoration: none;
+  padding: 8px 14px;
+  background: aqua;
+  color: black;
+  font-weight: 700;
+  text-decoration: underline;
 }
