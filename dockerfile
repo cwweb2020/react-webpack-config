@@ -1,23 +1,33 @@
-# Usa la imagen oficial de Node.js como base
-FROM node:20
+# Usa la imagen oficial de Node.js basada en Debian
+FROM node:buster
 
-# Establece el directorio de trabajo dentro del contenedor
-WORKDIR /app
+# Actualiza los paquetes e instala las herramientas de compilación y dependencias necesarias
+RUN apt-get update && apt-get install -y \
+    autoconf \
+    automake \
+    build-essential \
+    nasm \
+    libpng-dev \
+ && rm -rf /var/lib/apt/lists/*
 
-# Copia los archivos de dependencias primero para aprovechar la caché de Docker
-COPY package*.json ./
+# Crear un grupo y usuario para la app
+RUN addgroup --system app && adduser --system --ingroup app app
 
-# Instala las dependencias de producción
-RUN npm ci --only=production
+# Establece el directorio de trabajo
+WORKDIR /app/
 
-# Copia el resto de los archivos de la aplicación
-COPY . .
+# Copia solo los archivos de dependencias y ejecuta npm install
+COPY --chown=app package*.json ./
+RUN npm install && chown -R app:app node_modules
 
-# Compila la aplicación
-RUN npm run build
+# Copia el resto del código
+COPY --chown=app . .
 
-# Expone el puerto en el que la aplicación escuchará
+# Exponer el puerto
 EXPOSE 3000
 
-# Comando para correr la aplicación
+# Cambiar al usuario no root 'app'
+USER app
+
+# Comando para iniciar la aplicación
 CMD ["npm", "start"]

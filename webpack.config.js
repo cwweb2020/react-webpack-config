@@ -113,14 +113,27 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
   },
+  // devServer: {
+  //   static: {
+  //     directory: path.join(__dirname, "public"),
+  //     watch: true,
+  //   },
+  //   compress: true,
+  //   port: 3000,
+  //   hot: true, // HMR activado
+  //   historyApiFallback: true,
+  // },
   devServer: {
+    host: "0.0.0.0", // Escucha en todas las interfaces
+    publicPath: "/",
+    // public: "localhost:3000", // Especifica el host público y el puerto accesibles desde el navegador
+    historyApiFallback: true,
+    compress: true,
+    port: 3000,
+    hot: true,
     static: {
       directory: path.join(__dirname, "public"),
       watch: true,
     },
-    compress: true,
-    port: 3000,
-    hot: true, // HMR activado
-    historyApiFallback: true,
   },
 };
